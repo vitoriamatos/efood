@@ -1,6 +1,7 @@
+import styled from 'styled-components'
 import { createGlobalStyle } from 'styled-components'
 
-const Colors = {
+export const Colors = {
   withe: '#FFF',
   ligthOrgange: '#FFF8F2',
   red: '#E66767'
@@ -15,6 +16,13 @@ export const GlobalCss = createGlobalStyle`
   }
 
   body{
-    background-color: ${Colors.ligthOrgange}
+    background-color: ${Colors.ligthOrgange};
+
+  }
+
+  .container{
+    max-width: 1024px;
+    width: 100%;
+    margin: 0 auto;
   }
 `
