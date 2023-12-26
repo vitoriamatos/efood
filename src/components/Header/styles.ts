@@ -23,10 +23,15 @@ export const HeaderPerfil = styled.div`
   background-image: url(${logo});
   width: 100%;
   padding: 40px;
+  display: flex;
+  justify-content: center;
 `
 export const HeaderPerfilContainer = styled.div`
-  padding-left: 20rem;
-  padding-right: 20rem;
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  column-gap: 15rem;
+`
+export const Link = styled.a`
+  text-decoration: none;
+  color: ${Colors.red};
 `

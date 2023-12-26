@@ -11,7 +11,7 @@ export const ImageContainer = styled.div`
 export const ContainerOverlay = styled.div`
   position: absolute;
   bottom: 10%;
-  left: 17%;
+  left: 22rem;
   transform: translate(-50%, -50%);
   z-index: 1;
 `
@@ -50,5 +50,4 @@ export const Subtitle = styled.h2`
 export const TextArea = styled.div`
   display: flex;
   justify-content: left;
-  /* Adicione outros estilos conforme necessário para a área de texto */
 `

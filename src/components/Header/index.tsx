@@ -3,7 +3,8 @@ import {
   HeaderBarPerfil,
   HeaderHome,
   HeaderPerfil,
-  HeaderPerfilContainer
+  HeaderPerfilContainer,
+  Link
 } from './styles'
 import logo from '../../assets/images/logo.svg'
 
@@ -17,7 +18,7 @@ const Header = ({ screen }: Props) => {
       <HeaderBarPerfil>
         <HeaderPerfil>
           <HeaderPerfilContainer>
-            <a>Restaurantes</a>
+            <Link href="/">Restaurantes</Link>
             <img src={logo} alt="logo" width="125"></img>
             <a>0 produto(s) no carrinho</a>
           </HeaderPerfilContainer>

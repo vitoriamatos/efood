@@ -48,7 +48,7 @@ const Restaurant = ({
 
     <Description>{description}</Description>
     <Button type="link" title="Saiba mais2 " to={`${button}?restaurante=${id}`}>
-      Saiba mais2
+      Saiba mais
     </Button>
   </CardContainer>
 )
