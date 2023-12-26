@@ -4,6 +4,7 @@ import { createGlobalStyle } from 'styled-components'
 export const Colors = {
   withe: '#FFF',
   ligthOrgange: '#FFF8F2',
+  ligthYellow: '#FFEBD9',
   red: '#E66767'
 }
 

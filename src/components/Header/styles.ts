@@ -2,16 +2,31 @@ import styled from 'styled-components'
 import { Colors } from '../../styles'
 import logo from '../../assets/images/fundo.png'
 
-export const HeaderBar = styled.header`
+export const HeaderBarHome = styled.header`
   color: ${Colors.red};
   padding: 24px;
   border-radius: 16px;
 `
-
-export const HeaderContainer = styled.div`
+export const HeaderBarPerfil = styled.header`
+  color: ${Colors.red};
+  border-radius: 16px;
+`
+export const HeaderHome = styled.div`
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   margin-left: 8rem;
   margin-right: 8rem;
   margin-top: 20px;
+`
+
+export const HeaderPerfil = styled.div`
+  background-image: url(${logo});
+  width: 100%;
+  padding: 40px;
+`
+export const HeaderPerfilContainer = styled.div`
+  padding-left: 20rem;
+  padding-right: 20rem;
+  display: flex;
+  justify-content: space-between;
 `

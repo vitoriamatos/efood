@@ -15,17 +15,19 @@ import Button from '../Button'
 type Props = {
   id: number
   restaurant: string
-  stars: string
+  name: string
+  value: string
   description: string
   infos: string[]
   image: string
   button: string
 }
 
-const Restaurant = ({
+const Menu = ({
   id,
   restaurant,
-  stars,
+  name,
+  value,
   description,
   infos,
   image,
@@ -33,23 +35,22 @@ const Restaurant = ({
 }: Props) => (
   <CardContainer>
     <img src={image} alt={restaurant} />
-    <Infos>
-      {infos.map((info) => (
-        <Tag key={info}>{info}</Tag>
-      ))}
-    </Infos>
+
     <TitleContainer>
-      <Title>{restaurant}</Title>
+      <Title>{name}</Title>
       <Stars>
-        <StarsLabel>{stars}</StarsLabel>
-        <StarsImage src={star}></StarsImage>
+        <StarsLabel>{value}</StarsLabel>
       </Stars>
     </TitleContainer>
 
     <Description>{description}</Description>
-    <Button type="link" title="Saiba mais2 " to={`${button}?restaurante=${id}`}>
-      Saiba mais2
+    <Button
+      type="cart"
+      title="carrinho"
+      to={button + `/?restaurant=${encodeURIComponent(id)}`}
+    >
+      Adicionar ao carrinho
     </Button>
   </CardContainer>
 )
-export default Restaurant
+export default Menu

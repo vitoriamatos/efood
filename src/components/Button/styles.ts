@@ -22,3 +22,16 @@ export const ButtonLink = styled(Link)`
   margin-top: 20px;
   display: inline-block;
 `
+export const ButtonCart = styled(Link)`
+  border: 2px solid ${Colors.ligthYellow};
+  color: ${Colors.red};
+  background-color: ${Colors.ligthYellow};
+  font-size: 16px;
+  font-weight: bold;
+  padding: 8px 16px;
+  text-decoration: none;
+  text-align: center;
+  margin-top: 20px;
+  display: inline-block;
+  width: 100%;
+`

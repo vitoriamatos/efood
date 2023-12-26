@@ -1,30 +1,30 @@
 import React from 'react'
-
 import { GlobalCss } from './styles'
-import Header from './components/Header'
-import Banner from './components/Banner'
-import { RouterProvider, createBrowserRouter } from 'react-router-dom'
-import Restaurant from './components/Restaurants'
-import RestaurantList from './components/RestaurantsList'
+import {
+  RouterProvider,
+  createBrowserRouter,
+  BrowserRouter,
+  Route,
+  Routes
+} from 'react-router-dom'
+import Home from './pages/Home'
+import Footer from './components/Footer'
+import Perfil from './pages/Perfil'
 
-const routes = createBrowserRouter([
-  {
-    path: '/',
-    element: (
-      <>
-        <Banner />
-        <RestaurantList background="withe" />
-      </>
-    )
-  }
-])
+const RoutesMain = () => (
+  <Routes>
+    <Route path="/" element={<Home />} />
+    <Route path="/perfil" element={<Perfil />} />
+  </Routes>
+)
 function App() {
   return (
-    <>
+    <BrowserRouter>
       <GlobalCss />
       <div className=""> </div>
-      <RouterProvider router={routes} />
-    </>
+      <RoutesMain />
+      <Footer />
+    </BrowserRouter>
   )
 }
 
