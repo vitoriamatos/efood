@@ -1,7 +1,5 @@
 import styled from 'styled-components'
 import { Colors } from '../../styles'
-import logo1 from '../../assets/images/restaurant1.png'
-import logo2 from '../../assets/images/restaurante2.png'
 
 export const ImageContainer = styled.div`
   position: relative;

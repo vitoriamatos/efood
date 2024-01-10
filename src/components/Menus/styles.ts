@@ -7,7 +7,6 @@ export const CardContainer = styled.div`
   border: 1px solid ${Colors.red};
   padding: 8px;
   position: relative;
-  
 `
 export const Title = styled.h3`
   font-weight: bold;
@@ -71,21 +70,20 @@ export const Modal = styled.div`
 `
 export const ModalContainer = styled.div`
   display: flex;
-  justify-content:center;
+  justify-content: center;
   margin-top: 10%;
 `
 
 export const ModalContent = styled.div`
-  max-width: 960px;  
+  max-width: 960px;
   position: relative;
   z-index: 1;
   header {
     display: flex;
     justify-content: right;
-    
   }
 
-  img { 
+  img {
     display: block;
     max-width: 100%;
   }
@@ -108,19 +106,16 @@ export const Card = styled.div`
 `
 
 export const CardImage = styled.img`
-
   width: 450px;
   height: 300px;
 `
 
 export const CardText = styled.div`
- 
   display: block;
-  color:${Colors.withe};
+  color: ${Colors.withe};
   margin-left: 30px;
 `
 export const DescriptionMenu = styled.h4`
-
   font-weight: 100;
   margin-top: 20px;
 `

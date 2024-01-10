@@ -8,10 +8,8 @@ import {
   Title,
   TitleOverlay
 } from './styles'
-import banner from '../../assets/images/restaurant1.png'
+
 import Header from '../Header'
-import Tag from '../Tag'
-import Restaurant from '../../models/Restaurant'
 
 type Props = {
   restaurantName: string

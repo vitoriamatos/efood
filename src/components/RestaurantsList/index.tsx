@@ -13,6 +13,7 @@ const RestaurantList = ({ restaurants }: Props) => (
       <List>
         {restaurants.map((restaurant) => (
           <Restaurants
+            key={restaurant.id}
             id={restaurant.id}
             title={restaurant.titulo}
             highlighted={restaurant.destacado}
@@ -28,7 +29,6 @@ const RestaurantList = ({ restaurants }: Props) => (
               description: menuItem.descricao,
               portion: menuItem.porcao
             }))}
-            
           />
         ))}
       </List>

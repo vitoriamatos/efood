@@ -10,7 +10,7 @@ export const ButtonContainer = styled.button`
   font-weight: bold;
   padding: 8px 16px;
 
-  :hover{
+  :hover {
     background-color: ${Colors.darkYellow};
   }
 `
@@ -39,7 +39,7 @@ export const ButtonCart = styled.button`
   display: inline-block;
   width: 100%;
 
-  :hover{
+  :hover {
     background-color: ${Colors.darkYellow};
   }
 `

@@ -14,21 +14,21 @@ import {
 import Button from '../Button'
 
 type Props = {
-    id: number;
-    title: string;
-    highlighted: boolean;
-    type: string;
-    avaliation: number;
-    description: string;
-    background: string;
-    menu: {
-      image: string;
-      price: number;
-      id: number;
-      name: string;
-      description: string;
-      portion: string;
-    }[];
+  id: number
+  title: string
+  highlighted: boolean
+  type: string
+  avaliation: number
+  description: string
+  background: string
+  menu: {
+    image: string
+    price: number
+    id: number
+    name: string
+    description: string
+    portion: string
+  }[]
 }
 
 const Restaurant = ({
@@ -42,11 +42,9 @@ const Restaurant = ({
   menu
 }: Props) => (
   <CardContainer>
-    <Image src={background} alt={title} width='350'/>
+    <Image src={background} alt={title} width="350" />
     <Infos>
-      {highlighted ? (
-        <Tag key={id}>Especial da semana</Tag>
-      ) : null}
+      {highlighted ? <Tag key={id}>Especial da semana</Tag> : null}
       <Tag key={id}>{type}</Tag>
     </Infos>
     <TitleContainer>

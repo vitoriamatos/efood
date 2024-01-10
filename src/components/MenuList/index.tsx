@@ -1,14 +1,13 @@
-
 import Menus from '../Menus'
 import { Container, List } from './styles'
 
 type Props = {
   menus: {
-    image: string,
-    price: number,
-    id: number,
-    name: string,
-    description: string,
+    image: string
+    price: number
+    id: number
+    name: string
+    description: string
     portion: string
   }[]
 }
@@ -17,8 +16,8 @@ const MenuList = ({ menus }: Props) => (
     <div className="container">
       <List>
         {menus.map((menu) => (
-         <li>
-           <Menus
+          <Menus
+            key={menu.id}
             id={menu.id}
             name={menu.name}
             price={menu.price}
@@ -26,7 +25,6 @@ const MenuList = ({ menus }: Props) => (
             image={menu.image}
             portion={menu.portion}
           />
-         </li>
         ))}
       </List>
     </div>

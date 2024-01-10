@@ -1,6 +1,6 @@
 import React from 'react'
 import { GlobalCss } from './styles'
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import { BrowserRouter } from 'react-router-dom'
 
 import Footer from './components/Footer'
 
