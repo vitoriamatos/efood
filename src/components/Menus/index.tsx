@@ -8,49 +8,98 @@ import {
   TitleContainer,
   Stars,
   StarsImage,
-  StarsLabel
+  StarsLabel,
+  Image,
+  Modal,
+  ModalContent,
+  Overlay,
+  ModalContainer,
+  Card,
+  CardImage,
+  CardText,
+  DescriptionMenu
 } from './styles'
 import Button from '../Button'
+import { useState } from 'react'
+
+import closeIcon from '../../assets/images/fechar.png'
 
 type Props = {
-  id: number
-  restaurant: string
-  name: string
-  value: string
-  description: string
-  infos: string[]
-  image: string
-  button: string
+  image: string;
+  price: number;
+  id: number;
+  name: string;
+  description: string;
+  portion: string;
 }
-
 const Menu = ({
-  id,
-  restaurant,
-  name,
-  value,
-  description,
-  infos,
   image,
-  button
-}: Props) => (
-  <CardContainer>
-    <img src={image} alt={restaurant} />
+  price,
+  id,
+  name,
+  description,
+  portion
+}: Props) => {
 
-    <TitleContainer>
-      <Title>{name}</Title>
-      <Stars>
-        <StarsLabel>{value}</StarsLabel>
-      </Stars>
-    </TitleContainer>
+  const [openModal, setOpenModal] = useState(false)
+  const [modalUrl, setModalUrl] = useState('')
+  const formattedPrice = price.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+  const finalPrice = 'Adicionar ao carrinho - ' + formattedPrice
+  return (
+    <>
+      <CardContainer>
+        <Image src={image} alt={name} width='350' />
 
-    <Description>{description}</Description>
-    <Button
-      type="cart"
-      title="carrinho"
-      to={button + `/?restaurant=${encodeURIComponent(id)}`}
-    >
-      Adicionar ao carrinho
-    </Button>
-  </CardContainer>
-)
+        <TitleContainer>
+          <Title>{name}</Title>
+          <Stars>
+            <StarsLabel>{formattedPrice}</StarsLabel>
+          </Stars>
+        </TitleContainer>
+
+        <Description>{description}</Description>
+        <Button
+          type="cart"
+          title="carrinho"
+          onClick={() => {
+            setOpenModal(true);
+            setModalUrl(name);
+          }}
+        >
+          Adicionar ao carrinho
+        </Button>
+      </CardContainer>
+
+      <Modal className={openModal ? 'visible' : ''}>
+        <Overlay className={openModal ? 'visible' : ''} />
+
+        <ModalContainer>
+          <ModalContent >
+            <Card>
+              <CardImage src={image} alt={name} sizes="" />
+              <CardText>
+                <header>
+                <img src={closeIcon}  onClick={() => {
+            setOpenModal(false);
+            
+          }}></img>
+                </header>
+                <h3>{modalUrl}</h3>
+                <DescriptionMenu>{description}</DescriptionMenu>
+                <DescriptionMenu>Serve: de {portion}</DescriptionMenu>
+                <Button
+                  type="cart"
+                  title="carrinho"
+                >
+                {finalPrice}
+                </Button>
+              </CardText>
+            </Card>
+          </ModalContent>
+        </ModalContainer>
+      </Modal>
+    </>
+
+  )
+}
 export default Menu

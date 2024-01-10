@@ -10,6 +10,7 @@ export const List = styled.ul`
   column-gap: 42px;
   row-gap: 42px;
   margin-top: 40px;
+  list-style-type: none;
 `
 export const Title = styled.h2`
   font-size: 18px;

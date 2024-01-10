@@ -19,7 +19,7 @@ const Button = ({ type, title, to, onClick, children }: Props) => {
 
   if (type === 'cart') {
     return (
-      <ButtonCart to={to as string} title={title}>
+      <ButtonCart onClick={onClick} title={title}>
         {children}
       </ButtonCart>
     )

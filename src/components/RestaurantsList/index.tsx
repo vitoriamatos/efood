@@ -1,24 +1,34 @@
+import Restaurant from '../../pages/Home'
 import Restaurants from '../Restaurants'
 import { Container, List } from './styles'
-import Restaurant from '../../models/Restaurant'
+
 type Props = {
   background: 'withe' | 'black'
   restaurants: Restaurant[]
 }
-const RestaurantList = ({ background, restaurants }: Props) => (
+
+const RestaurantList = ({ restaurants }: Props) => (
   <Container>
     <div className="container">
       <List>
         {restaurants.map((restaurant) => (
           <Restaurants
-            key={restaurant.id}
             id={restaurant.id}
-            restaurant={restaurant.restaurant}
-            stars={restaurant.stars}
-            description={restaurant.description}
-            image={restaurant.image}
-            infos={restaurant.infos}
-            button={restaurant.button}
+            title={restaurant.titulo}
+            highlighted={restaurant.destacado}
+            type={restaurant.tipo}
+            avaliation={restaurant.avaliacao}
+            description={restaurant.descricao}
+            background={restaurant.capa}
+            menu={restaurant.cardapio.map((menuItem) => ({
+              image: menuItem.foto,
+              price: menuItem.preco,
+              id: menuItem.id,
+              name: menuItem.nome,
+              description: menuItem.descricao,
+              portion: menuItem.porcao
+            }))}
+            
           />
         ))}
       </List>

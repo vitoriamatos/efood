@@ -1,10 +1,10 @@
-import styled from 'styled-components'
 import { createGlobalStyle } from 'styled-components'
 
 export const Colors = {
   withe: '#FFF',
   ligthOrgange: '#FFF8F2',
   ligthYellow: '#FFEBD9',
+  darkYellow: '#ffcfa3',
   red: '#E66767'
 }
 
@@ -25,5 +25,7 @@ export const GlobalCss = createGlobalStyle`
     max-width: 1024px;
     width: 100%;
     margin: 0 auto;
+    display: flex;
+    justify-content: center;
   }
 `

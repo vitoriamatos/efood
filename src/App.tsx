@@ -1,22 +1,12 @@
 import React from 'react'
 import { GlobalCss } from './styles'
-import {
-  RouterProvider,
-  createBrowserRouter,
-  BrowserRouter,
-  Route,
-  Routes
-} from 'react-router-dom'
-import Home from './pages/Home'
-import Footer from './components/Footer'
-import Perfil from './pages/Perfil'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
 
-const RoutesMain = () => (
-  <Routes>
-    <Route path="/" element={<Home />} />
-    <Route path="/perfil" element={<Perfil />} />
-  </Routes>
-)
+import Footer from './components/Footer'
+
+import RoutesMain from './routes'
+// import Cart from './components/Cart'
+
 function App() {
   return (
     <BrowserRouter>
@@ -24,6 +14,7 @@ function App() {
       <div className=""> </div>
       <RoutesMain />
       <Footer />
+      {/* <Cart /> */}
     </BrowserRouter>
   )
 }

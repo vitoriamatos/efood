@@ -8,46 +8,57 @@ import {
   TitleContainer,
   Stars,
   StarsImage,
+  Image,
   StarsLabel
 } from './styles'
 import Button from '../Button'
 
 type Props = {
-  id: number
-  restaurant: string
-  stars: string
-  description: string
-  infos: string[]
-  image: string
-  button: string
+    id: number;
+    title: string;
+    highlighted: boolean;
+    type: string;
+    avaliation: number;
+    description: string;
+    background: string;
+    menu: {
+      image: string;
+      price: number;
+      id: number;
+      name: string;
+      description: string;
+      portion: string;
+    }[];
 }
 
 const Restaurant = ({
   id,
-  restaurant,
-  stars,
+  title,
+  highlighted,
+  type,
+  avaliation,
   description,
-  infos,
-  image,
-  button
+  background,
+  menu
 }: Props) => (
   <CardContainer>
-    <img src={image} alt={restaurant} />
+    <Image src={background} alt={title} width='350'/>
     <Infos>
-      {infos.map((info) => (
-        <Tag key={info}>{info}</Tag>
-      ))}
+      {highlighted ? (
+        <Tag key={id}>Especial da semana</Tag>
+      ) : null}
+      <Tag key={id}>{type}</Tag>
     </Infos>
     <TitleContainer>
-      <Title>{restaurant}</Title>
+      <Title>{title}</Title>
       <Stars>
-        <StarsLabel>{stars}</StarsLabel>
+        <StarsLabel>{avaliation}</StarsLabel>
         <StarsImage src={star}></StarsImage>
       </Stars>
     </TitleContainer>
 
     <Description>{description}</Description>
-    <Button type="link" title="Saiba mais2 " to={`${button}?restaurante=${id}`}>
+    <Button type="link" title="Saiba mais 2" to={`/restaurante/${id}`}>
       Saiba mais
     </Button>
   </CardContainer>

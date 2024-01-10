@@ -22,6 +22,7 @@ export const Description = styled.p`
   display: block;
   margin-top: 16px;
   color: ${Colors.red};
+  height: 110px;
 `
 
 export const Infos = styled.div`
@@ -49,5 +50,10 @@ export const StarsLabel = styled.h4`
 `
 export const StarsImage = styled.img`
   width: 21px;
+  margin: auto;
+`
+export const Image = styled.img`
+  width: 480px;
+  height: 300px;
   margin: auto;
 `

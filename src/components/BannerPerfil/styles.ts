@@ -11,7 +11,7 @@ export const ImageContainer = styled.div`
 export const ContainerOverlay = styled.div`
   position: absolute;
   bottom: 10%;
-  left: 22rem;
+  left: 18rem;
   transform: translate(-50%, -50%);
   z-index: 1;
 `

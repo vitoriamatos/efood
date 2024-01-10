@@ -29,7 +29,7 @@ export const HeaderPerfil = styled.div`
 export const HeaderPerfilContainer = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  column-gap: 15rem;
+  column-gap: 24rem;
 `
 export const Link = styled.a`
   text-decoration: none;

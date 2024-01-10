@@ -9,6 +9,10 @@ export const ButtonContainer = styled.button`
   font-size: 16px;
   font-weight: bold;
   padding: 8px 16px;
+
+  :hover{
+    background-color: ${Colors.darkYellow};
+  }
 `
 
 export const ButtonLink = styled(Link)`
@@ -22,7 +26,7 @@ export const ButtonLink = styled(Link)`
   margin-top: 20px;
   display: inline-block;
 `
-export const ButtonCart = styled(Link)`
+export const ButtonCart = styled.button`
   border: 2px solid ${Colors.ligthYellow};
   color: ${Colors.red};
   background-color: ${Colors.ligthYellow};
@@ -34,4 +38,8 @@ export const ButtonCart = styled(Link)`
   margin-top: 20px;
   display: inline-block;
   width: 100%;
+
+  :hover{
+    background-color: ${Colors.darkYellow};
+  }
 `

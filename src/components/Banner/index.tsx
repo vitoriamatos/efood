@@ -4,7 +4,7 @@ import Header from '../Header'
 import Tag from '../Tag'
 const BannerPerfil = () => (
   <Image style={{ backgroundImage: `url(${banner})` }}>
-    <div className="container">
+    <div>
       <Header screen="home"></Header>
       <TextArea>
         <Title>Viva experiências gastronômicas no conforto da sua casa</Title>
