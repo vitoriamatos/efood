@@ -43,3 +43,22 @@ export const ButtonCart = styled.button`
     background-color: ${Colors.darkYellow};
   }
 `
+
+export const ButtonCartPayment = styled.button`
+  border: 2px solid ${Colors.ligthYellow};
+  color: ${Colors.red};
+  background-color: ${Colors.ligthYellow};
+  font-size: 16px;
+  font-weight: bold;
+  padding: 8px 16px;
+  text-decoration: none;
+  text-align: center;
+  margin-top: 20px;
+  margin-bottom: 40px;
+  display: inline-block;
+  width: 100%;
+
+  :hover {
+    background-color: ${Colors.darkYellow};
+  }
+`

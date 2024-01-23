@@ -9,7 +9,8 @@ import {
   Stars,
   StarsImage,
   Image,
-  StarsLabel
+  StarsLabel,
+  DescriptionContainer
 } from './styles'
 import Button from '../Button'
 
@@ -55,10 +56,12 @@ const Restaurant = ({
       </Stars>
     </TitleContainer>
 
-    <Description>{description}</Description>
-    <Button type="link" title="Saiba mais 2" to={`/restaurante/${id}`}>
-      Saiba mais
-    </Button>
+    <DescriptionContainer>
+      <Description>{description}</Description>
+      <Button type="link" title="Saiba mais 2" to={`/restaurante/${id}`}>
+        Saiba mais
+      </Button>
+    </DescriptionContainer>
   </CardContainer>
 )
 export default Restaurant

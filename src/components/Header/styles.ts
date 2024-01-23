@@ -2,6 +2,11 @@ import styled from 'styled-components'
 import { Colors } from '../../styles'
 import logo from '../../assets/images/fundo.png'
 
+export const breakpoints = {
+  desktop: '1024px',
+  tablet: '768px'
+}
+
 export const HeaderBarHome = styled.header`
   color: ${Colors.red};
   padding: 24px;
@@ -30,8 +35,28 @@ export const HeaderPerfilContainer = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   column-gap: 24rem;
+
+  @media (max-width: ${breakpoints.desktop}) {
+    grid-template-columns: 1fr;
+  }
 `
 export const Link = styled.a`
   text-decoration: none;
   color: ${Colors.red};
+
+  @media (max-width: ${breakpoints.desktop}) {
+    display: none;
+  }
+`
+
+export const CartLink = styled.a`
+  @media (max-width: ${breakpoints.desktop}) {
+    margin-top: 30px;
+  }
+`
+export const Logo = styled.a`
+  @media (max-width: ${breakpoints.desktop}) {
+    display: flex;
+    justify-content: center;
+  }
 `

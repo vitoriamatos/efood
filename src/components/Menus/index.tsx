@@ -19,16 +19,30 @@ import Button from '../Button'
 import { useState } from 'react'
 
 import closeIcon from '../../assets/images/fechar.png'
+import Cart from '../Cart'
+import { useDispatch } from 'react-redux'
+import { add, open } from '../../store/reducers/cart'
+import Restaurant from '../Restaurants'
+import Restaurants from '../../pages/Home'
 
 type Props = {
   image: string
   price: number
   id: number
+  idRestaurant: number
   name: string
   description: string
   portion: string
 }
-const Menu = ({ image, price, id, name, description, portion }: Props) => {
+const Menu = ({
+  image,
+  price,
+  name,
+  description,
+  portion,
+  id,
+  idRestaurant
+}: Props) => {
   const [openModal, setOpenModal] = useState(false)
   const [modalUrl, setModalUrl] = useState('')
   const formattedPrice = price.toLocaleString('pt-BR', {
@@ -36,6 +50,22 @@ const Menu = ({ image, price, id, name, description, portion }: Props) => {
     currency: 'BRL'
   })
   const finalPrice = 'Adicionar ao carrinho - ' + formattedPrice
+  const dispatch = useDispatch()
+
+  const addToCart = () => {
+    const itemToAdd = {
+      id,
+      name,
+      description,
+      price,
+      portion,
+      image,
+      idRestaurant
+    }
+
+    dispatch(add(itemToAdd))
+    dispatch(open())
+  }
   return (
     <>
       <CardContainer>
@@ -80,7 +110,7 @@ const Menu = ({ image, price, id, name, description, portion }: Props) => {
                 <h3>{modalUrl}</h3>
                 <DescriptionMenu>{description}</DescriptionMenu>
                 <DescriptionMenu>Serve: de {portion}</DescriptionMenu>
-                <Button type="cart" title="carrinho">
+                <Button onClick={addToCart} type="cart" title="carrinho">
                   {finalPrice}
                 </Button>
               </CardText>

@@ -1,6 +1,11 @@
 import styled from 'styled-components'
 import { Colors } from '../../styles'
 
+export const breakpoints = {
+  desktop: '1024px',
+  tablet: '768px'
+}
+
 export const ImageContainer = styled.div`
   position: relative;
   width: 100%;
@@ -12,6 +17,11 @@ export const ContainerOverlay = styled.div`
   left: 18rem;
   transform: translate(-50%, -50%);
   z-index: 1;
+
+  @media (max-width: ${breakpoints.desktop}) {
+    top: 69%;
+    left: 10rem;
+  }
 `
 export const Image = styled.div`
   width: 100%;
@@ -21,6 +31,10 @@ export const Image = styled.div`
   background-size: cover;
   filter: brightness(40%);
   padding: 1px;
+
+  @media (max-width: ${breakpoints.desktop}) {
+    height: 115%;
+  }
 `
 
 export const TitleOverlay = styled.div`

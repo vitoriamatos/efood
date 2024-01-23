@@ -1,7 +1,12 @@
-import { ButtonCart, ButtonContainer, ButtonLink } from './styles'
+import {
+  ButtonCart,
+  ButtonCartPayment,
+  ButtonContainer,
+  ButtonLink
+} from './styles'
 
 type Props = {
-  type: 'button' | 'link' | 'cart'
+  type: 'button' | 'link' | 'cart' | 'button_cart'
   title: string
   to?: string
   onClick?: () => void
@@ -14,6 +19,14 @@ const Button = ({ type, title, to, onClick, children }: Props) => {
       <ButtonContainer type="button" title={title} onClick={onClick}>
         {children}
       </ButtonContainer>
+    )
+  }
+
+  if (type === 'button_cart') {
+    return (
+      <ButtonCartPayment type="button" title={title} onClick={onClick}>
+        {children}
+      </ButtonCartPayment>
     )
   }
 

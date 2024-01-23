@@ -1,6 +1,11 @@
 import styled from 'styled-components'
 import { Colors } from '../../styles'
 
+export const breakpoints = {
+  desktop: '1024px',
+  tablet: '768px'
+}
+
 export const CardContainer = styled.div`
   background-color: ${Colors.withe};
   border-radius: 4px;
@@ -23,6 +28,10 @@ export const Description = styled.p`
   margin-top: 16px;
   color: ${Colors.red};
   height: 110px;
+
+  @media (max-width: ${breakpoints.desktop}) {
+    height: 100%;
+  }
 `
 
 export const Infos = styled.div`
@@ -36,6 +45,9 @@ export const TitleContainer = styled.div`
   justify-content: space-between;
 `
 
+export const DescriptionContainer = styled.div`
+  display: block;
+`
 export const Stars = styled.div`
   margin: auto 0;
   padding-right: 10px;
@@ -56,4 +68,9 @@ export const Image = styled.img`
   width: 480px;
   height: 300px;
   margin: auto;
+
+  @media (max-width: ${breakpoints.desktop}) {
+    width: 100%;
+    height: 280px;
+  }
 `

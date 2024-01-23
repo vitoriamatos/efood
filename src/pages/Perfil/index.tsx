@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import BannerPerfil from '../../components/BannerPerfil'
 import MenuList from '../../components/MenuList'
 import { useParams } from 'react-router-dom'
-
+import { useGetFeaturedRestaurantQuery } from '../../services/api'
 type Restaurant = {
   id: number
   titulo: string
@@ -28,55 +28,66 @@ type MenuItem = {
   name: string
   description: string
   portion: string
+  idRestaurant: number
 }
 
 const Perfil = () => {
-  const [restaurant, setRestaurant] = useState<Restaurant[]>([])
+  // const [restaurant, setRestaurant] = useState<Restaurant[]>([])
+  const { data: restaurant, isLoading } = useGetFeaturedRestaurantQuery()
   const [restaurantDetail, setRestaurantDetail] = useState<Restaurant | null>(
     null
   )
-
-  useEffect(() => {
-    fetch('https://fake-api-tau.vercel.app/api/efood/restaurantes')
-      .then((res) => res.json())
-      .then((res) => setRestaurant(res))
-  }, [])
-
+  // const [restaurant, setRestaurant] = useState<Restaurant[]>([])
   const { id } = useParams<{ id: string }>()
 
   useEffect(() => {
     if (id) {
       const restaurantId = parseInt(id, 10)
-      const selectedRestaurant = restaurant.find((r) => r.id === restaurantId)
-      setRestaurantDetail(selectedRestaurant || null)
+      if (restaurant) {
+        const selectedRestaurant = restaurant.find((r) => r.id === restaurantId)
+        setRestaurantDetail(selectedRestaurant || null)
+      }
     }
   }, [id, restaurant])
 
-  return (
-    <>
-      {restaurantDetail && (
-        <>
-          <BannerPerfil
-            restaurantName={restaurantDetail.titulo}
-            restaurantInfo={restaurantDetail.tipo}
-            image={restaurantDetail.capa}
-          />
-          <MenuList menus={mapToMenuItem(restaurantDetail.cardapio)} />
-        </>
-      )}
-    </>
-  )
+  if (restaurant) {
+    return (
+      <>
+        {restaurantDetail && (
+          <>
+            <BannerPerfil
+              restaurantName={restaurantDetail.titulo}
+              restaurantInfo={restaurantDetail.tipo}
+              image={restaurantDetail.capa}
+            />
+            <MenuList
+              menus={mapToMenuItem(
+                restaurantDetail.cardapio,
+                restaurantDetail.id
+              )}
+            />
+          </>
+        )}
+      </>
+    )
+  }
+
+  return <h4>Carregando...</h4>
 }
 
 export default Perfil
 
-const mapToMenuItem = (cardapio: Restaurant['cardapio']): MenuItem[] => {
+const mapToMenuItem = (
+  cardapio: Restaurant['cardapio'],
+  idRestaurant: number
+): MenuItem[] => {
   return cardapio.map((item) => ({
     image: item.foto,
     price: item.preco,
     id: item.id,
     name: item.nome,
     description: item.descricao,
-    portion: item.porcao
+    portion: item.porcao,
+    idRestaurant
   }))
 }
