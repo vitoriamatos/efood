@@ -2,6 +2,7 @@ import Banner from '../../components/Banner'
 import RestaurantList from '../../components/RestaurantsList'
 import { useEffect, useState } from 'react'
 import { useGetFeaturedRestaurantQuery } from '../../services/api'
+import Loader from '../../components/Loader'
 type Restaurant = {
   id: number
   titulo: string
@@ -35,6 +36,6 @@ const Restaurant = () => {
     )
   }
 
-  return <h4>Carregando...</h4>
+  return <Loader />
 }
 export default Restaurant

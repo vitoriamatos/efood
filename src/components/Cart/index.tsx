@@ -18,22 +18,35 @@ import pizza from '../../assets/images/pizza.png'
 import lixo from '../../assets/images/lixo.svg'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootReducer } from '../../store'
-import { close, remove } from '../../store/reducers/cart'
+import { close, remove, openCheckout } from '../../store/reducers/cart'
 
 import closeIcon from '../../assets/images/fechar.png'
 import { useState } from 'react'
+import Checkout from '../Checkout'
 
 const Cart = () => {
-  const { isOpen, items } = useSelector((state: RootReducer) => state.cart)
+  const { isOpen, items, isOpenCheckout } = useSelector(
+    (state: RootReducer) => state.cart
+  )
+
   const dispatch = useDispatch()
+  const [showCheckout, setShowCheckout] = useState(false)
 
   const closeCart = () => {
     dispatch(close())
+    localStorage.setItem('cart', JSON.stringify(items))
   }
 
+  const openCheckouts = () => {
+    setShowCheckout(true)
+    dispatch(openCheckout())
+  }
   const getTotalPrice = () => {
     return items.reduce((count, actualValue) => {
-      return (count += actualValue.price!)
+      if (actualValue.price) {
+        return (count += actualValue.price)
+      }
+      return 0
     }, 0)
   }
 
@@ -92,10 +105,14 @@ const Cart = () => {
         <Button
           title="Clique aqui para continuar com a compra"
           type="button_cart"
+          onClick={() => {
+            openCheckouts()
+          }}
         >
           Continuar para a entrega
         </Button>
       </Sidebar>
+      {showCheckout && <Checkout />}
     </CartContainer>
   )
 }

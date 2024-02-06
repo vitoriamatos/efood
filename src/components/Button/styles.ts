@@ -54,7 +54,6 @@ export const ButtonCartPayment = styled.button`
   text-decoration: none;
   text-align: center;
   margin-top: 20px;
-  margin-bottom: 40px;
   display: inline-block;
   width: 100%;
 

@@ -3,6 +3,7 @@ import BannerPerfil from '../../components/BannerPerfil'
 import MenuList from '../../components/MenuList'
 import { useParams } from 'react-router-dom'
 import { useGetFeaturedRestaurantQuery } from '../../services/api'
+import Loader from '../../components/Loader'
 type Restaurant = {
   id: number
   titulo: string
@@ -72,7 +73,7 @@ const Perfil = () => {
     )
   }
 
-  return <h4>Carregando...</h4>
+  return <Loader />
 }
 
 export default Perfil
