@@ -44,12 +44,15 @@ const Checkout = () => {
   }
 
   const clearLocalStorageAndCloseCheckout = () => {
-    // Esvaziar o localStorage do carrinho (substitua 'seuCarrinho' pelo nome real usado no localStorage)
     dispatch(clear())
-    // Fechar o CheckoutContainer (substitua closeCart pelo nome da função que fecha o CheckoutContainer)
     closeCart()
   }
 
+  const calculateTotal = () => {
+    return items.reduce((total, item) => total + item.price, 0)
+  }
+
+  const totalAmount = calculateTotal()
   const [purchase, { isLoading, isError, data, isSuccess }] =
     usePurchaseMutation()
   const form = useFormik({
@@ -96,15 +99,15 @@ const Checkout = () => {
         .required('O Campo é obrigatório'),
       cvv: Yup.string()
         .min(3, 'O campo precisa ter pelo menos 3 Caracteres')
-        .max(3, 'O campo precisa ter pelo menos 3 Caracteres')
+        .max(3, 'O campo só pode ter 3 Caracteres')
         .required('O Campo é obrigatório'),
       month: Yup.string()
         .min(2, 'O campo precisa ter pelo menos 2 Caracteres')
-        .max(2, 'O campo precisa ter pelo menos 2 Caracteres')
+        .max(2, 'O campo só pode ter 2 Caracteres')
         .required('O Campo é obrigatório'),
       year: Yup.string()
         .min(2, 'O campo precisa ter pelo menos 2 Caracteres')
-        .max(2, 'O campo precisa ter pelo menos 2 Caracteres')
+        .max(2, 'O campo só pode ter 2 Caracteres')
         .required('O Campo é obrigatório')
     }),
     onSubmit: (values) => {
@@ -139,6 +142,7 @@ const Checkout = () => {
       })
     }
   })
+
   const getErrorMessage = (fieldName: string, message?: string) => {
     const isChange = fieldName in form.touched
     const isInvalid = fieldName in form.errors
@@ -156,6 +160,77 @@ const Checkout = () => {
 
   if (items.length === 0) {
     return <Navigate to="/" />
+  }
+
+  const handleStep1Blur = (e: React.FocusEvent<HTMLInputElement>) => {
+    const { name } = e.target
+
+    // Ativar a validação do campo quando ele perde o foco
+    form.setFieldTouched(name, true, false)
+  }
+
+  // Função para manipular a mudança de entrada nos campos do formulário
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target
+
+    // Atualize os valores do formulário
+    form.handleChange(e)
+
+    // Execute a validação do campo alterado
+    form.validateField(name)
+    // Verifique se todos os campos obrigatórios da etapa 1 estão preenchidos
+    const ClientName = form.values.ClientName
+    const address = form.values.address
+    const citty = form.values.address
+    const postalCode = form.values.postalCode
+    const number = form.values.number
+
+    // form.validateField(name).then(() => {
+    //   // Verifique se todos os campos obrigatórios da etapa 1 estão preenchidos
+    //   const isStep1Valid =
+    //     form.values.ClientName !== '' &&
+    //     form.values.address !== '' &&
+    //     form.values.citty !== '' &&
+    //     form.values.postalCode !== '' &&
+    //     form.values.number !== ''
+
+    //   setIsFormValidStep1(isStep1Valid)
+    // })
+  }
+
+  // Função para manipular o evento de foco nos campos do formulário
+  const handleInputBlur = (e: React.FocusEvent<HTMLInputElement>) => {
+    const { name } = e.target
+
+    // Ative a validação do campo quando ele perde o foco
+    form.setFieldTouched(name, true, false)
+  }
+
+  // Função para manipular o clique no botão "Continuar com o pagamento"
+  const handleContinuePaymentClick = () => {
+    // Verifique se todos os campos obrigatórios da etapa 1 estão preenchidos
+    console.log(form.values.ClientName !== '')
+    console.log(form.values.address !== '')
+    console.log(form.values.citty !== '')
+    console.log(form.values.postalCode !== '')
+    console.log(form.values.number !== '')
+
+    const isStep1Valid =
+      form.values.ClientName !== '' &&
+      form.values.address !== '' &&
+      form.values.citty !== '' &&
+      form.values.postalCode !== '' &&
+      form.values.number !== ''
+    console.log(isStep1Valid)
+    // Se os campos estiverem preenchidos corretamente, avance para a próxima etapa
+    if (isStep1Valid) {
+      nextStep()
+    } else {
+      // Caso contrário, exiba uma mensagem de alerta
+      alert(
+        'Por favor, preencha todos os campos obrigatórios antes de prosseguir.'
+      )
+    }
   }
   return (
     <CheckoutContainer className={isOpenCheckout ? 'is-open' : ''}>
@@ -205,30 +280,38 @@ const Checkout = () => {
                   type="text"
                   name="ClientName"
                   value={form.values.ClientName}
-                  onChange={form.handleChange}
-                  onBlur={form.handleBlur}
-                  className={checkInputHasError('fullName') ? 'error' : ''}
+                  onInput={handleInputChange}
+                  onBlur={handleInputBlur}
+                  className={checkInputHasError('ClientName') ? 'error' : ''}
+                  placeholder="Seu nome"
                 />
+                <small>
+                  {getErrorMessage('ClientName', form.errors.ClientName)}
+                </small>
                 <Label htmlFor="address">Endereço</Label>
                 <Input
                   id="address"
                   type="text"
                   name="address"
                   value={form.values.address}
-                  onChange={form.handleChange}
-                  onBlur={form.handleBlur}
-                  className={checkInputHasError('addres') ? 'error' : ''}
+                  onInput={handleInputChange}
+                  onBlur={handleInputBlur}
+                  className={checkInputHasError('address') ? 'error' : ''}
+                  placeholder="Nome da Rua"
                 />
+                <small>{getErrorMessage('address', form.errors.address)}</small>
                 <Label htmlFor="citty">Cidade</Label>
                 <Input
                   id="citty"
                   type="text"
                   name="citty"
                   value={form.values.citty}
-                  onChange={form.handleChange}
-                  onBlur={form.handleBlur}
+                  onInput={handleInputChange}
+                  onBlur={handleInputBlur}
                   className={checkInputHasError('citty') ? 'error' : ''}
+                  placeholder="Cidade"
                 />
+                <small>{getErrorMessage('citty', form.errors.citty)}</small>
                 <DeliveryArea>
                   <div>
                     <Label htmlFor="postalCode">CEP</Label>
@@ -237,12 +320,16 @@ const Checkout = () => {
                       type="text"
                       name="postalCode"
                       value={form.values.postalCode}
-                      onChange={form.handleChange}
-                      onBlur={form.handleBlur}
+                      onInput={handleInputChange}
+                      onBlur={handleInputBlur}
                       className={
                         checkInputHasError('postalCode') ? 'error' : ''
                       }
+                      placeholder="CEP"
                     />
+                    <small>
+                      {getErrorMessage('postalCode', form.errors.postalCode)}
+                    </small>
                   </div>
 
                   <div>
@@ -252,13 +339,17 @@ const Checkout = () => {
                       type="text"
                       name="number"
                       value={form.values.number}
-                      onChange={form.handleChange}
-                      onBlur={form.handleBlur}
+                      onInput={handleInputChange}
+                      onBlur={handleInputBlur}
                       className={checkInputHasError('number') ? 'error' : ''}
+                      placeholder="Número da Residência"
                     />
+                    <small>
+                      {getErrorMessage('number', form.errors.number)}
+                    </small>
                   </div>
                 </DeliveryArea>
-                <Label htmlFor="complement">Complemento(opcional)</Label>
+                <Label htmlFor="complement">Complemento (opcional)</Label>
                 <Input
                   id="complement"
                   type="text"
@@ -267,11 +358,15 @@ const Checkout = () => {
                   onChange={form.handleChange}
                   onBlur={form.handleBlur}
                   className={checkInputHasError('complement') ? 'error' : ''}
+                  placeholder="Opcional"
                 />
+                <small>
+                  {getErrorMessage('complement', form.errors.complement)}
+                </small>
                 <Button
                   type="button_cart"
                   title="Pagamento"
-                  onClick={() => nextStep()}
+                  onClick={() => handleContinuePaymentClick()}
                 >
                   Continuar com o pagamento
                 </Button>
@@ -288,7 +383,7 @@ const Checkout = () => {
                 style={{ display: currentStep === 2 ? 'block' : 'none' }}
               >
                 <TitlePayment>
-                  Pagamento - Valor a receber R$ 190,90
+                  Pagamento - Valor a receber {totalAmount.toFixed(2)}
                 </TitlePayment>
 
                 <Label htmlFor="CartName">Nome no cartão</Label>
@@ -300,7 +395,11 @@ const Checkout = () => {
                   onChange={form.handleChange}
                   onBlur={form.handleBlur}
                   className={checkInputHasError('CartName') ? 'error' : ''}
+                  placeholder="Nome do Titular escrito no cartão"
                 />
+                <small>
+                  {getErrorMessage('CartName', form.errors.CartName)}
+                </small>
                 <CartArea>
                   <div>
                     <Label htmlFor="CartNumber">Número do cartão</Label>
@@ -314,19 +413,26 @@ const Checkout = () => {
                       className={
                         checkInputHasError('CartNumber') ? 'error' : ''
                       }
+                      placeholder="Número do Cartão"
                     />
+                    <small>
+                      {getErrorMessage('CartNumber', form.errors.CartNumber)}
+                    </small>
                   </div>
                   <div>
                     <Label htmlFor="cvv">CVV</Label>
                     <Input
                       id="cvv"
-                      type="number"
+                      type="text"
                       name="cvv"
                       value={form.values.cvv}
                       onChange={form.handleChange}
                       onBlur={form.handleBlur}
                       className={checkInputHasError('number') ? 'error' : ''}
+                      maxLength={3}
+                      placeholder="123"
                     />
+                    <small>{getErrorMessage('cvv', form.errors.cvv)}</small>
                   </div>
                 </CartArea>
 
@@ -340,8 +446,11 @@ const Checkout = () => {
                       value={form.values.month}
                       onChange={form.handleChange}
                       onBlur={form.handleBlur}
+                      maxLength={2}
                       className={checkInputHasError('month') ? 'error' : ''}
+                      placeholder="28"
                     />
+                    <small>{getErrorMessage('month', form.errors.month)}</small>
                   </div>
                   <div>
                     <Label htmlFor="year">Ano do vencimento</Label>
@@ -353,7 +462,10 @@ const Checkout = () => {
                       onChange={form.handleChange}
                       onBlur={form.handleBlur}
                       className={checkInputHasError('year') ? 'error' : ''}
+                      maxLength={2}
+                      placeholder="02"
                     />
+                    <small>{getErrorMessage('year', form.errors.year)}</small>
                   </div>
                 </DeliveryArea>
 
